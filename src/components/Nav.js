@@ -11,6 +11,9 @@ const Ul = styled.ul`
     display: flex;
     justify-content: space-around;
     width: 35%;
+    @media screen and (max-width: 420px) {
+        width: 70%;
+    }
 `
 const Li = styled.li`
     margin: auto;
@@ -24,6 +27,11 @@ const Li = styled.li`
         background: ${theme.colorMap.cream};
         border-radius: 12px;
     }
+
+    
+    @media screen and (max-width: 420px) {
+        font-size: ${theme.fontSize.micro};
+    }
 `
 const Link = styled.a`
     text-decoration: none;
@@ -34,6 +42,7 @@ const NavBar = styled.div`
     justify-content: space-between;
     margin: 5%;
     margin-top: 0;
+    width: 95vw;
     background: ${theme.colorMap.mustardYellow};
 `
 

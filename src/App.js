@@ -13,15 +13,15 @@ const LoadableHomePage = lazy(() =>
 );
 
 const Container = styled('div')`
+    width: 100vw;
+    min-height: 100vh;
+    height: 100%;
     margin: 0;
     padding: 0;
-    height: 100vh; 
-    min-height: 100%;
-    width: 100vw;
-    text-align: center;
     color: ${theme.colorMap.darkGrey2};
     font-family: ${theme.fontFamily.body};
     background:  ${theme.colorMap.mustardYellow};
+    overflow-x: hidden;
 `;
 
 const App = () => (

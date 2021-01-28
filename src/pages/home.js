@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { jsx, css } from '@emotion/react';
 import { theme } from '../theme';
 
 import couple from "../images/wedding.svg";
 import string from "../images/flowerString.svg";
-import girl from "../images/girlOnComputer.svg";
-
+import girl from "../images/girlOnComputer2.svg";
 
 
 
@@ -13,7 +13,7 @@ const Button = styled.button`
   width: 140px;
   height: 40px;
   padding: 1%;
-  margin: 10% auto;
+  margin: 5% auto;
   font-size: ${theme.fontSize.tiny};
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -32,63 +32,109 @@ const Button = styled.button`
   }
 `
 
-// const Body = styled.div`
-//   width: 95vw;
-//   height: 100vh;
-//   min-height: 100%;
-//   font-family: 'Raleway', sans-serif;
-//   color: #333333
-//   margin: auto;
-//   overflow-x: visible;
-// `
+const Text = styled.div`
+  width: 45%;
+  margin: auto;
+  text-align: center;
+  @media ${theme.screenSize.upToSmall} {
+    font-size: ${theme.fontSize.tiny};
+`
 
 const Header = styled.div`
   font-family: ${theme.fontFamily.header}, sans-serif;
   font-size: ${theme.fontSize.jumbo};
-  text-align: center;
-`
-//30px
 
+  @media screen and (max-width: 420px) {
+    font-size: ${theme.fontSize.xlarge};
+  }
+`
 
 const SectionOne = styled.div`
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
-  width: 100vw;
+  width: 95vw;
   height: 75vh;
+  margin: auto;
 `
 const SectionTwo = styled.div`
   display: flex;
   justify-content: space-around;
-  flex-wrap: wrap;
+  flex-wrap: wrap-reverse;
   width: 100vw;
-  height: 50vh;
-  background: ${theme.colorMap.cream};;
+  height: 60vh;
+  background: ${theme.colorMap.cream};
+  @media ${theme.screenSize.upToSmall} {
+    height: 60vh;
 `
 const SectionThree = styled.div`
   display: flex;
   justify-content: space-around;
   height: 50vh;
-  background: ${theme.colorMap.mustardYellow};;
-`
-const Text = styled.div`
-  text-align: center;
-  margin:  auto;
-  width: 40vw;
+  background: ${theme.colorMap.mustardYellow};
+  
 `
 
-const x = {
-  height: '50vh',
-  width: '40vh',
-  margin: 'auto',
-}
-const y = {
-  height: '40vw',
-  width: '40vw',
-  margin: 'auto',
-}
-// height: '40vh',
-// width: '40vh'
+
+const ImgCouple = styled.img`
+  width: 50vw;
+  height: auto;
+  margin: auto;
+
+  @media ${theme.screenSize.upToLarge} {
+    width: 54%;
+  }
+
+  @media ${theme.screenSize.upToSmall} {
+    width: 70%;
+  }
+`
+
+const ImgGirl = styled.img`
+  width: 33vw;
+  height: auto;
+  margin: auto;
+
+  @media ${theme.screenSize.xlargeAndUp} {
+    width: 55vh;
+  }
+
+  @media ${theme.screenSize.upToLarge} {
+    width: 45%;
+  }
+  @media ${theme.screenSize.upToSmall} {
+    width: 60%;
+  }
+`
+
+const ImgString = styled.img`
+  width: 20vw;
+  height: auto;
+  margin: auto;
+  
+  @media ${theme.screenSize.upToLarge} {
+    width: 30vw;
+  }
+  @media ${theme.screenSize.upToSmall} {
+    width: 50vw;
+  }
+  
+`
+
+
+const Img = ({alt, src, ...props}) => (
+  <img 
+    alt= {alt}
+    src={src}
+    css={css`
+      margin: auto,
+      width: 25vw,
+      height: auto
+    `}
+    {...props}
+  />
+)
+
 
 const Home = () => (
     <>
@@ -98,23 +144,46 @@ const Home = () => (
           <p>Finding the one was hard, planning your big day doesn’t have to be</p>
           <Button>Get Started</Button>
         </Text>
-        <img alt="Couple dancing in Indian clothes" style={y} src={couple}/>
+        <ImgCouple
+          alt="Couple dancing together" 
+          src={couple} 
+        />
       </SectionOne>
       <SectionTwo>
-        <img alt="Girl on computer" style={x} src={girl}/>
+        <ImgGirl
+          alt="Girl on computer" 
+          src={girl} 
+        />
         <Text>
           <Header>Discover local vendors</Header>
           <p>Easily find and hire vendors providing wedding services near you!</p>
         </Text>
       </SectionTwo>
       <SectionThree>
-        <img alt="Strings of flowers" style={x} src={string}/>
         <Text>
           <Header>Sign up to be a vendor</Header>
           <p>Expand your reach and provide services to clients looking for vendors just like you!</p>
         </Text>
+
+        <ImgString
+          alt="Strings of flowers" 
+          src={string} 
+        />
+        
+        {/*
+        <Img 
+          alt="Strings of flowers" 
+          src={string} 
+          css= {css`
+            width:25vw;
+            height: 40vh;
+          `}
+        />
+        */}
       </SectionThree>
     </>
 );
+
+
 
 export default Home;
