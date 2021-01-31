@@ -1,11 +1,23 @@
+/** @jsxRuntime classic */
+/** @jsx jsx */
+
+import { jsx, css, keyframes  } from '@emotion/react';
 import React from 'react';
 import styled from '@emotion/styled';
-import { jsx, css } from '@emotion/react';
 import { theme } from '../theme';
-
-import couple from "../images/wedding.svg";
+import couple from "../images/wedding2.svg";
 import string from "../images/flowerString.svg";
 import girl from "../images/girlOnComputer2.svg";
+
+const bounce = keyframes`
+  0% to {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(-40px);
+  }
+`
 
 
 
@@ -33,11 +45,14 @@ const Button = styled.button`
 `
 
 const Text = styled.div`
-  width: 45%;
+  width: 45vw;
   margin: auto;
   text-align: center;
+  
   @media ${theme.screenSize.upToSmall} {
     font-size: ${theme.fontSize.tiny};
+    width: 60%;
+  }
 `
 
 const Header = styled.div`
@@ -56,6 +71,7 @@ const SectionOne = styled.div`
   width: 95vw;
   height: 75vh;
   margin: auto;
+  background: ${theme.colorMap.mustardYellow};
 `
 const SectionTwo = styled.div`
   display: flex;
@@ -64,20 +80,24 @@ const SectionTwo = styled.div`
   width: 100vw;
   height: 60vh;
   background: ${theme.colorMap.cream};
-  @media ${theme.screenSize.upToSmall} {
-    height: 60vh;
+
+  @media screen and (max-width: 420px) {
+    height: 70vh;
+  }
 `
 const SectionThree = styled.div`
   display: flex;
   justify-content: space-around;
-  height: 50vh;
+  flex-wrap: wrap;
+  width: 95vw;
+  height: 60vh;
   background: ${theme.colorMap.mustardYellow};
   
 `
 
 
 const ImgCouple = styled.img`
-  width: 50vw;
+  width: 45vw;
   height: auto;
   margin: auto;
 
@@ -91,12 +111,12 @@ const ImgCouple = styled.img`
 `
 
 const ImgGirl = styled.img`
-  width: 33vw;
+  width: 25vw;
   height: auto;
   margin: auto;
 
   @media ${theme.screenSize.xlargeAndUp} {
-    width: 55vh;
+    width: 50vh;
   }
 
   @media ${theme.screenSize.upToLarge} {
@@ -116,7 +136,7 @@ const ImgString = styled.img`
     width: 30vw;
   }
   @media ${theme.screenSize.upToSmall} {
-    width: 50vw;
+    width: 40vw;
   }
   
 `
@@ -130,6 +150,13 @@ const Img = ({alt, src, ...props}) => (
       margin: auto,
       width: 25vw,
       height: auto
+
+      @media ${theme.screenSize.upToLarge} {
+        width: 30vw;
+      }
+      @media ${theme.screenSize.upToSmall} {
+        width: 50vw;
+      }
     `}
     {...props}
   />
@@ -139,7 +166,7 @@ const Img = ({alt, src, ...props}) => (
 const Home = () => (
     <>
       <SectionOne>
-        <Text>
+        <Text css={css`animation: ${bounce} 1s ease-in-out 1`}>
           <Header>South Asian Wedding Planning</Header>
           <p>Finding the one was hard, planning your big day doesn’t have to be</p>
           <Button>Get Started</Button>
@@ -149,37 +176,40 @@ const Home = () => (
           src={couple} 
         />
       </SectionOne>
-      <SectionTwo>
+      <SectionTwo >
         <ImgGirl
           alt="Girl on computer" 
           src={girl} 
         />
-        <Text>
+        <Text css={css`animation: ${bounce} 1s ease-in-out `}>
           <Header>Discover local vendors</Header>
           <p>Easily find and hire vendors providing wedding services near you!</p>
         </Text>
       </SectionTwo>
       <SectionThree>
-        <Text>
+        <Text css={css`animation: ${bounce} 1s ease-in-out `}>
           <Header>Sign up to be a vendor</Header>
           <p>Expand your reach and provide services to clients looking for vendors just like you!</p>
         </Text>
-
+      
         <ImgString
           alt="Strings of flowers" 
           src={string} 
         />
-        
+    
         {/*
+        
         <Img 
           alt="Strings of flowers" 
           src={string} 
           css= {css`
-            width:25vw;
-            height: 40vh;
+            width: 25vw;
+            height: auto;
+            margin: auto;
           `}
         />
         */}
+        
       </SectionThree>
     </>
 );
