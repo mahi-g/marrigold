@@ -59,6 +59,8 @@ const colorMap = {
     lightGrey: '#9E9898',
     mustardYellow: '#EAC85E',
     orange: '#FEA91D',
+    white: '#FFFFFF',
+
 };
 
 /**
@@ -96,6 +98,8 @@ const layer = {
  */
 const fontFamily = {
     header: `Paytone One`,
+    body: `Raleway`,
+    logo: `Arya`,
 };
 
 export const theme = {
