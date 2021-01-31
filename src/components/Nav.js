@@ -12,7 +12,7 @@ const Ul = styled.ul`
     display: flex;
     justify-content: space-around;
     width: 35%;
-    @media screen and (max-width: 420px) {
+    @media ${theme.screenSize.upToSmall} {
         width: 70%;
     }
 `
@@ -29,8 +29,7 @@ const Li = styled.li`
         border-radius: 12px;
     }
 
-    
-    @media screen and (max-width: 420px) {
+    @media ${theme.screenSize.upToSmall} {
         font-size: ${theme.fontSize.micro};
     }
 `
