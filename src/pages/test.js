@@ -1,11 +1,19 @@
 import React from 'react';
-import FormCard from '../components/card/FormCard';
+import CategoryCard from '../components/card/CategoryCard';
+import photographer from "../images/photographer.png";
+import styled from '@emotion/styled';
+
+const StyledCategoryCard = styled(CategoryCard)`
+    margin-left: 100px;
+`;
 
 const Test = () => (
-    <FormCard
-        header='Header'
-        height={300}
-        width={500}
+    //Testing the category card
+
+    <StyledCategoryCard
+        categoryName={'Photographer'}
+        image={photographer}
+        href={'/photographer'}
     />
 );
 

@@ -100,7 +100,7 @@ const fontFamily = {
     header: `Paytone One`,
     body: `Raleway`,
     logo: `Arya`,
-    formHeader: 'Roboto',
+    formHeader: `Roboto`,
 };
 
 export const theme = {
