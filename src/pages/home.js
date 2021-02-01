@@ -19,8 +19,6 @@ const bounce = keyframes`
   }
 `
 
-
-
 const Button = styled.button`
   width: 140px;
   height: 40px;
@@ -95,7 +93,6 @@ const SectionThree = styled.div`
   
 `
 
-
 const ImgCouple = styled.img`
   width: 45vw;
   height: auto;
@@ -140,7 +137,6 @@ const ImgString = styled.img`
   }
   
 `
-
 
 const Img = ({alt, src, ...props}) => (
   <img 
@@ -213,7 +209,5 @@ const Home = () => (
       </SectionThree>
     </>
 );
-
-
 
 export default Home;

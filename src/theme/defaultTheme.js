@@ -41,7 +41,7 @@ const size = {
     default: '16px',
     medium: '20px',
     mediumLarge: '24px',
-    articleContent: '30px',
+    xmediumLarge: '30px',
     large: '32px',
     xlarge: '64px',
     xxlarge: '120px',
@@ -100,6 +100,7 @@ const fontFamily = {
     header: `Paytone One`,
     body: `Raleway`,
     logo: `Arya`,
+    formHeader: 'Roboto',
 };
 
 export const theme = {
