@@ -33,12 +33,14 @@ const FormCard = ({
     maxWidth,
     height,
     width,
+    ...props
 }) => (
     <Container
       maxHeight={maxHeight}
       maxWidth={maxWidth}
       height={height}
       width={width}
+      {...props}
     >
       {header && <Header>{header}</Header>}
       {body && body}
