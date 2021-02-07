@@ -1,20 +1,23 @@
 import React from 'react';
-import CategoryCard from '../components/card/CategoryCard';
-import photographer from "../images/photographer.png";
+import SignUp from '../components/form/SignUp';
+import Contact from '../components/form/Contact';
+
+import FormCard from '../components/card/FormCard';
 import styled from '@emotion/styled';
 
-const StyledCategoryCard = styled(CategoryCard)`
+const StyledCategoryCard = styled(FormCard)`
     margin-left: 100px;
 `;
 
 const Test = () => (
     //Testing the category card
-
-    <StyledCategoryCard
-        categoryName={'Photographer'}
-        image={photographer}
-        href={'/photographer'}
-    />
+    <>
+        <SignUp/>
+        <br/>
+        <Contact />
+    </>
 );
+
+
 
 export default Test;
