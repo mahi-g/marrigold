@@ -1,0 +1,22 @@
+import React from 'react';
+import VendorCard from '../components/card/VendorCard';
+import styled from '@emotion/styled';
+import testImage from "../images/test.jpg";
+
+const StyledVendorCard = styled(VendorCard)`
+    margin-left: 100px;
+`;
+
+const Test = () => (
+    //Testing the vendor card
+
+    <StyledVendorCard
+        businessName={"Tahiya's Photography fgjfgj jhgfjhbrj gcvfvr mfbjhrvfhjer"}
+        location={"New York, NY"}
+        image={testImage}
+        href={'/photographer'}
+        startingCost={500}
+    />
+);
+
+export default Test;
