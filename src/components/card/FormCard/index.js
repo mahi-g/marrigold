@@ -8,7 +8,7 @@ const Container = styled.div`
   margin: 0 auto;
   max-height: ${({ maxHeight }) => maxHeight && `${maxHeight}px`};
   max-width: ${({ maxWidth }) => maxWidth && `${maxWidth}px`};
-  height: ${({ width }) => width ? `${width}px` : 'auto'};
+  height: ${({ height }) => height ? `${height}px` : 'auto'};
   width: ${({ width }) => width ? `${width}px` : 'auto'};
   @media ${theme.screenSize.upToLarge} {
     width: 80%;

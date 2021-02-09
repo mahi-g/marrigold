@@ -16,6 +16,18 @@ const LoadableTestPage = lazy(() =>
     import( './pages/test')
 );
 
+const LoadableSignUpPage = lazy(() =>
+    import( './pages/signup')
+);
+
+const LoadableLoginPage = lazy(() =>
+    import( './pages/signin')
+);
+
+const LoadableContactPage = lazy(() =>
+    import( './pages/contact')
+);
+
 const Container = styled('div')`
     width: 100vw;
     min-height: 100vh;
@@ -38,6 +50,18 @@ const App = () => (
                             <Route
                                 path="/test"
                                 component={LoadableTestPage}
+                            />
+                            <Route
+                                path="/signin"
+                                component={LoadableLoginPage}
+                            />
+                            <Route
+                                path="/signup"
+                                component={LoadableSignUpPage}
+                            />
+                            <Route
+                                path="/contact"
+                                component={LoadableContactPage}
                             />
                             <Route
                                 path="/"

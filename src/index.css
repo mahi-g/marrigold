@@ -3,26 +3,3 @@ body{
     padding: 0;
 }
 
-input{
-    border: none;
-    border-radius: 5px;
-    height: 30px;
-    width: 250px;
-    padding: 10px;
-    margin: 5px 0;
-}
-
-label{
-    font-weight: bold;
-    font-size: small;
-    padding-left: 5px;
-}
-
-textarea{
-    border: none;
-    border-radius: 5px;
-    height: 70px;
-    width: 250px;
-    padding: 10px;
-    margin: 5px 0;
-}
