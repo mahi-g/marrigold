@@ -2,8 +2,6 @@ import React from 'react'
 import styled from '@emotion/styled'
 import { theme } from '../theme'
 
-
-
 const Logo = styled.h2`
     font-family: ${theme.fontFamily.logo}, sans-serif;
     text-align: left;

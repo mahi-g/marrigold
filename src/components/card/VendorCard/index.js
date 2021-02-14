@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { theme } from '../../../theme';
-// import { Rating } from 'material-ui-rating';
+import { Rating } from "@material-ui/lab";
 
 const NAME_FONT_SIZE = '16px';
 const LEFT_PADDING = '30px';
@@ -73,49 +73,67 @@ const LinkWrapper = styled.a`
 `;
 
 const StartingCost = styled.div`
-    color: ${theme.colorMap.darkGrey};
-    font-family: ${theme.fontFamily.formHeader}, sans-serif;
-    font-size: ${COST_FONT_SIZE};
-    font-weight: bold;
-    padding-left: ${LEFT_PADDING};
-    padding-top: ${theme.size.small};
-    @media ${theme.screenSize.upToLarge} {
-        font-size: ${theme.fontSize.xsmall};
-    }
+  color: ${theme.colorMap.darkGrey};
+  font-family: ${theme.fontFamily.formHeader}, sans-serif;
+  font-size: ${COST_FONT_SIZE};
+  font-weight: bold;
+  padding-left: ${LEFT_PADDING};
+  padding-top: ${theme.size.medium};
+  @media ${theme.screenSize.upToLarge} {
+    font-size: ${theme.fontSize.xsmall};
+  }
 `;
 
+const StyledRating = styled(Rating)`
+  padding-left: ${LEFT_PADDING};
+  padding-top: ${theme.size.small};
+  display: inline-block;
+  padding-right: ${theme.size.xsmall};
+`;
+
+const TotalRating= styled.div`
+  color: ${theme.colorMap.lightGrey};
+  font-family: ${theme.fontFamily.formHeader}, sans-serif;
+  font-size: ${theme.size.small};
+  display: inline-block;
+`;
 
 const VendorCard = ({
     businessName,
     location,
     image,
     href,
-    startingCost,
+    priceRange,
     reviewCount,
-    rating,
+    ratingValue,
+    totalRating,
     ...props
 }) => (
-    <LinkWrapper href={href}>
-        <Container
-            {...props}
-        >
-            <BusinessImage
-                alt={businessName}
-                src={image} 
-            />
-            <div>
-                <Name>{businessName}</Name>
-                {/* <Rating
-                  value={3}
-                  max={5}
-                /> */}
-                <Location>{location}</Location>
-                {startingCost ? 
-                    <StartingCost>Range: ${startingCost}</StartingCost> : 
-                    <StartingCost>Range: N/A</StartingCost>
-                }
-            </div>
-        </Container>
-    </LinkWrapper>
+      <LinkWrapper href={href}>
+          <Container
+              {...props}
+          >
+              <BusinessImage
+                  alt={businessName}
+                  src={image} 
+              />
+              <div>
+                  <Name>{businessName}</Name>
+                  <StyledRating
+                    value={ratingValue}
+                    max={5}
+                    precision={0.5}
+                    readOnly
+                    size="small"
+                  />
+                  <TotalRating>({totalRating})</TotalRating>
+                  <Location>{location}</Location>
+                  {priceRange ? 
+                      <StartingCost>Range: ${priceRange[0]} - ${priceRange[1]}</StartingCost> : 
+                      <StartingCost>Range: N/A</StartingCost>
+                  }
+              </div>
+          </Container>
+      </LinkWrapper>
 );
 export default VendorCard;

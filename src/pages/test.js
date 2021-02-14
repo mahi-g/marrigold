@@ -9,13 +9,14 @@ const StyledVendorCard = styled(VendorCard)`
 
 const Test = () => (
     //Testing the vendor card
-
     <StyledVendorCard
         businessName={"Tahiya's Photography"}
         location={"New York, NY"}
         image={testImage}
         href={'/photographer'}
-        startingCost={500}
+        ratingValue={4}
+        priceRange={[200,500]}
+        totalRating={30}
     />
 );
 

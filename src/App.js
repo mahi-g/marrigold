@@ -38,7 +38,7 @@ const App = () => (
                             <Route
                                 path="/test"
                                 component={LoadableTestPage}
-                            />  
+                            />
                             <Route
                                 path="/"
                                 component={LoadableHomePage}
