@@ -14,8 +14,6 @@
     "@testing-library/user-event": "^12.6.0",
     "emotion-theming": "^11.0.0",
     "material-ui": "^0.20.2",
-    "material-ui-rating": "^4.0.0-beta.2",
-    "material-ui-star-rating": "^1.0.0",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "react-helmet": "^6.1.0",
