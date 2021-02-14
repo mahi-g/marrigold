@@ -12,6 +12,10 @@ const LoadableHomePage = lazy(() =>
     import( './pages/home')
 );
 
+const LoadableTestPage = lazy(() =>
+    import( './pages/test')
+);
+
 const Container = styled('div')`
     width: 100vw;
     min-height: 100vh;
@@ -31,7 +35,10 @@ const App = () => (
             <BrowserRouter>
                     <Suspense fallback={<Loading />}>
                         <Switch>
-                            
+                            <Route
+                                path="/test"
+                                component={LoadableTestPage}
+                            />  
                             <Route
                                 path="/"
                                 component={LoadableHomePage}

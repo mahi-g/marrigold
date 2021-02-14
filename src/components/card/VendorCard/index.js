@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { theme } from '../../../theme';
+// import { Rating } from 'material-ui-rating';
 
 const NAME_FONT_SIZE = '16px';
 const LEFT_PADDING = '30px';
@@ -104,6 +105,10 @@ const VendorCard = ({
             />
             <div>
                 <Name>{businessName}</Name>
+                {/* <Rating
+                  value={3}
+                  max={5}
+                /> */}
                 <Location>{location}</Location>
                 {startingCost ? 
                     <StartingCost>Range: ${startingCost}</StartingCost> : 

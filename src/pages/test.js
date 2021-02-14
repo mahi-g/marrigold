@@ -11,7 +11,7 @@ const Test = () => (
     //Testing the vendor card
 
     <StyledVendorCard
-        businessName={"Tahiya's Photography fgjfgj jhgfjhbrj gcvfvr mfbjhrvfhjer"}
+        businessName={"Tahiya's Photography"}
         location={"New York, NY"}
         image={testImage}
         href={'/photographer'}
