@@ -10,12 +10,12 @@ const COST_FONT_SIZE = '12px';
 const IMAGE_HEIGHT = '130px';
 const IMAGE_WIDTH = '230px';
 const CONTAINER_HEIGHT = '170px';
-const CONTAINER_WIDTH = '480px';
+const CONTAINER_WIDTH = '400px';
 const HOVER_OFFESET = 5;
 
 const Container = styled.div`
   background: ${theme.colorMap.cream};
-  border-radius: ${theme.size.xmediumLarge};
+  border-radius: ${theme.size.small};
   display: flex;
   height: ${CONTAINER_HEIGHT};
   width: ${CONTAINER_WIDTH};
