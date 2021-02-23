@@ -7,18 +7,22 @@ import { Rating } from '@material-ui/lab';
 import WarningIcon from '@material-ui/icons/Warning';
 
 const INPUT_WIDTH = '380px';
+const CONTAINER_WIDTH = '400px';
+const CONTAINER_HEIGHT = '480px';
 
 const Container = styled.div`
-    width: 400px;
-    height: 480px;
+    width: ${CONTAINER_WIDTH};
+    height: ${CONTAINER_HEIGHT};
     display: flex;
     flex-direction: column;
     margin: 20px auto;
+
     @media ${theme.screenSize.upToLarge} {
         width: 90%;
         margin: 0 auto;
-        height: 65vh;
+        height: 80%;
       }
+    
 `
 const Button = styled.button`
     background: ${({background}) => background ? `${background}` : theme.colorMap.cream};
@@ -64,6 +68,7 @@ const Label = styled.label`
     font-size: ${theme.fontSize.tiny};
     margin-top: ${theme.size.small};
     padding-left: ${theme.size.small};
+
     @media ${theme.screenSize.upToLarge} {
         margin-top: ${theme.size.xsmall};
         font-size: ${theme.fontSize.tiny};
@@ -110,6 +115,7 @@ const StyledRating = styled(Rating)`
 `
 
 const Error = styled.div`
+    display: flex;
     font-size: ${theme.fontSize.tiny};
     color: ${theme.colorMap.red};
     background: rgb(214, 69, 49, 0.3);
@@ -117,46 +123,21 @@ const Error = styled.div`
     margin: ${theme.size.xsmall} auto;
     width: ${INPUT_WIDTH};
 
-    @media ${theme.screenSize.upToLarge} {
-        margin:  ${theme.size.xsmall} auto;
-        width: 85%;
+    & > div {
+        margin: 0 2px; 
+        padding-top: 4px;
+        width: 100%;
     }
+    @media ${theme.screenSize.upToLarge} {
+        margin-right: ${theme.size.large};
+        width: 90%;
+    }
+    @media ${theme.screenSize.upToSmall} {
+        margin-right: 2px;
+        width: 90%;
+    }
+    
 `
-/** example fields prop:
- *[
- *  [
- *      {
- *          name:'rating',
- *          value: '' / ['', ''] if placeholder is an array,
- *          placeholder: [''] / ['',''],
- *          label: 'Your Rating', 
- *          type: 'text' / 'password' / 'radio',
- *          inputType: 'rating' / 'textarea',
- *          required: true
- *      }
- *  ],
- *  [
- *      {
- *           name:'review', 
- *           value: '', 
- *           placeholder: ["Share your honest opinion"], 
- *           label: '', 
- *           type: 'text', 
- *           inputType: 'textarea'
- *        },
- *        {
- *           name: 'hiredVendor',  
- *           value: '', 
- *           placeholder: [''], 
- *           radiolabel: ['Yes','No'], 
- *           label: 'Did you hire this vendor for your wedding?', 
- *           type: 'radio', 
- *           required: true
- *        }
- *    ]
- * ]
- */
-
 class Form extends React.Component {
     constructor(props){
         super(props);
@@ -178,7 +159,6 @@ class Form extends React.Component {
     handleSubmission() {
         const { fields, step, error } = this.state;
         const err = this.handleError(step);
-        console.log(err);
         if(err){
             error[step] = "One or more fields are incomplete";
             this.setState({error});
@@ -271,7 +251,6 @@ class Form extends React.Component {
         let err = false;
         this.state.fields[index-1].forEach(field => {
             if(field.required){
-                console.log(field.value);
                 field.value.forEach(value => {
                     if(!value) err = true 
                 });
@@ -395,7 +374,12 @@ const FormGroup = ({ fieldGroup, radioValue, rating, error, handleRating, handle
             {values}
             <InputGroup>
                 { 
-                    error &&  <Error>{error}</Error> 
+                    error && <div> 
+                        <Error>
+                            <WarningIcon fontSize="small" margin="12px"/>
+                            <div>{error}</div>
+                        </Error> 
+                    </div>
                 }
             </InputGroup>
         </Container>
@@ -450,7 +434,7 @@ const RadioButton = ({field, radioValue, handleOnChange}) => {
     })
 
     return (
-        <div style={{display: 'flex', justifyContent: 'space-between', width:'50%', marginLeft: '8px'}}>
+        <div style={{display: 'flex', justifyContent: 'space-between', width:'50%', margin: '2px 5px'}}>
             {input}
         </div>
     );
