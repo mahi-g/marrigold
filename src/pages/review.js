@@ -1,26 +1,34 @@
 import React from 'react';
-import MultiStepForm from '../components/form';
+import Form from '../components/form';
 
 const Review = () => {
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    const handleSubmit = (fields) => {
         console.log("Submitted");
+        console.log(fields);
     }
 
     const fields = [
             [
-                { name:'review', value: '', placeholder: ["Share your honest opinion"], label: "", type: "text", inputType: "textarea" },
+                { name:'rating', value: [''], placeholder: [''], label: 'Your Rating', type: 'text', inputType: "rating", required: true },
+
+                { name:'review', value: [''], placeholder: ['Share your honest opinion'], label: '', type: 'text', inputType: 'textarea' },
             
-                { name: 'hiredVendor',  value: ['',''], placeholder: ["Yes", "No"], label: "Did you hire this vendor for your wedding?", type: "radio" },
+                { name: 'hiredVendor',  value: [''], placeholder: [''], radiolabel: ['Yes','No'], label: 'Did you hire this vendor for your wedding?', type: "radio", required: true },
+
+                { name:'name', value: ['',''], placeholder: ['Jane', 'Smith'], label: 'Name', type: 'text' },
             
-                { name:'name', value: '', placeholder: ["First name", "Last name"], label: "", type: "text"},
-            
-                { name:'email', value: '', placeholder: ["Email"], label: "", type: "text"},
+                { name:'email', value: [''], placeholder: ['janesmith@email.com'], label: 'Email', type: 'text', required: true },
+
             ]
     ];
     return(
-        <MultiStepForm fields={fields} maxSteps={1} headerText={"Review"} handleSubmit={handleSubmit}/>
+        <Form 
+            fields={fields} 
+            maxSteps={1} 
+            headerText={'Review'} 
+            handleSubmit={handleSubmit}
+        />
     );
 }
 

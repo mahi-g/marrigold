@@ -1,16 +1,23 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { theme } from '../../theme';
+import UploadImage from '../images';
 import FormCard from '../card/FormCard';
+import { Rating } from '@material-ui/lab';
+import WarningIcon from '@material-ui/icons/Warning';
+
+const INPUT_WIDTH = '380px';
 
 const Container = styled.div`
-    width: 500px;
-    height: 500px;
+    width: 400px;
+    height: 480px;
     display: flex;
     flex-direction: column;
-    margin: 10px auto;
+    margin: 20px auto;
     @media ${theme.screenSize.upToLarge} {
         width: 90%;
+        margin: 0 auto;
+        height: 65vh;
       }
 `
 const Button = styled.button`
@@ -37,36 +44,44 @@ const Button = styled.button`
         font-size: ${theme.fontSize.xsmall};
     }
 `
-
 const InputGroup = styled.div`
     width: inherit;
     display: flex; 
     flex-direction: column;
-    margin: ${theme.size.medium} 20%;
+    & > div {
+        display: flex;
+        justify-content: space-between;
+    }
+    
     @media ${theme.screenSize.upToLarge} {
         font-size: ${theme.fontSize.small};
-        margin:  ${theme.size.small} auto;
+        margin:  ${theme.size.tiny} auto;
+        width: 85%;
     }
 `
-
 const Label = styled.label`
     font-weight: bold;
-    font-size: ${theme.fontFamily.small};
+    font-size: ${theme.fontSize.tiny};
+    margin-top: ${theme.size.small};
     padding-left: ${theme.size.small};
-    margin-bottom: ${theme.size.xsmall} 0;
-
     @media ${theme.screenSize.upToLarge} {
+        margin-top: ${theme.size.xsmall};
         font-size: ${theme.fontSize.tiny};
     }
 `
 const Input = styled.input`
     border: none;
-    border-radius: ${theme.size.xsmall};
+    border-radius: ${theme.size.tiny};
     height: 25px;
-    width: 250px;
+    width: ${INPUT_WIDTH};
     padding: ${theme.size.small};
-    margin: ${theme.size.xsmall} 0;
+    margin: ${theme.size.xsmall};
 
+    &:focus {
+        outline: none;
+        border: 1px solid ${theme.colorMap.mustardYellow};
+        border-radius: ${theme.size.xsmall};
+    }
     @media ${theme.screenSize.upToLarge} {
         width: 85%;
         height: 20px;
@@ -76,109 +91,234 @@ const Textarea = styled.textarea`
     border: none;
     border-radius: ${theme.size.xsmall};
     height: 80px;
-    width: 250px;
-    font-family: ${theme.fontFamily.body}, sans-serif;
+    width: ${INPUT_WIDTH};
+    font-family: Arial;
     padding: ${theme.size.small};
     margin: ${theme.size.xsmall};
 
+    &:focus{
+        outline: none;
+        border: 1px solid ${theme.colorMap.mustardYellow};
+        border-radius: ${theme.size.xsmall};
+    }
     @media ${theme.screenSize.upToLarge} {
         width: 85%;
-        height: 80px;
-        margin: ${theme.size.tiny};
-
     }
 `
+const StyledRating = styled(Rating)`
+    margin-left: ${theme.size.xsmall};
+`
 
-class MultiStepForm extends React.Component {
+const Error = styled.div`
+    font-size: ${theme.fontSize.tiny};
+    color: ${theme.colorMap.red};
+    background: rgb(214, 69, 49, 0.3);
+    padding: ${theme.size.small};
+    margin: ${theme.size.xsmall} auto;
+    width: ${INPUT_WIDTH};
+
+    @media ${theme.screenSize.upToLarge} {
+        margin:  ${theme.size.xsmall} auto;
+        width: 85%;
+    }
+`
+/** example fields prop:
+ *[
+ *  [
+ *      {
+ *          name:'rating',
+ *          value: '' / ['', ''] if placeholder is an array,
+ *          placeholder: [''] / ['',''],
+ *          label: 'Your Rating', 
+ *          type: 'text' / 'password' / 'radio',
+ *          inputType: 'rating' / 'textarea',
+ *          required: true
+ *      }
+ *  ],
+ *  [
+ *      {
+ *           name:'review', 
+ *           value: '', 
+ *           placeholder: ["Share your honest opinion"], 
+ *           label: '', 
+ *           type: 'text', 
+ *           inputType: 'textarea'
+ *        },
+ *        {
+ *           name: 'hiredVendor',  
+ *           value: '', 
+ *           placeholder: [''], 
+ *           radiolabel: ['Yes','No'], 
+ *           label: 'Did you hire this vendor for your wedding?', 
+ *           type: 'radio', 
+ *           required: true
+ *        }
+ *    ]
+ * ]
+ */
+
+class Form extends React.Component {
     constructor(props){
         super(props);
         this.state = {
             fields: this.props.fields,
             step: 1,
+            rating: 1,
+            radioValue: {},
+            error: {}
         }
         this.handleSubmission = this.handleSubmission.bind(this);
         this.handleOnChange = this.handleOnChange.bind(this);
+        this.handleRating = this.handleRating.bind(this);
         this.handleNext = this.handleNext.bind(this);
         this.handlePrev = this.handlePrev.bind(this);
     }
-
-    handleSubmission(e) {
-        this.props.handleSubmit(e, this.state.fields);
-        const resetValue = this.resetForm();
-        this.setState({fields:resetValue, step:1});
+  
+    //send data back and reset state 
+    handleSubmission() {
+        const { fields, step, error } = this.state;
+        const err = this.handleError(step);
+        console.log(err);
+        if(err){
+            error[step] = "One or more fields are incomplete";
+            this.setState({error});
+        }
+        else{
+            this.props.handleSubmit(fields);
+            this.resetForm();
+            error[step] = "";
+        }
     }
 
+    //reset value fields in the inputs to empty string or array after submission
     resetForm(){
-        let fields = JSON.parse(JSON.stringify(this.props.fields)); 
+        //make deep copy of the current fields
+        let fields = JSON.parse(JSON.stringify(this.state.fields));
         fields.forEach(field => {
             field.forEach(input => {
-                if(Array.isArray(input.value)){
-                    input.value.forEach( (value,i) => input.value[i] = "");
-                }
-                else {
-                    input.value = "";
-                }
-            })
+                input.value.forEach( (value,i) => input.value[i] = "");
+            });
         });
-
-        return fields;
+        this.setState(({
+            fields,
+            step:1, 
+            radioValue:{},
+            error: {},
+            rating: 1
+        }));
     }
 
+    //Change/Update value field 
+    handleOnChange(e){
+        const { name, value, placeholder } = e.target;
+        let index = this.state.step-1;
+        let updatedFields = [...this.state.fields];
 
+        updatedFields[index].forEach( field => {
+            if(field.type === 'radio' && field.name === name){
+                field.value[0] = value;
+                let { radioValue } = this.state;
+                radioValue[name] = value;
+                this.setState({fields: updatedFields, radioValue});
+            }
+            if(field.name === name){
+                let valueIndex = field.placeholder.findIndex((e)=> e === placeholder);
+                field.value[valueIndex] = value;
+                this.setState({ fields: updatedFields });
+            }
+        });
+    }
+
+    handleRating(e , value, name){
+        e.preventDefault();
+        let index = this.state.step-1;
+        let updatedFields = [...this.state.fields];
+        updatedFields[index].forEach(input => {
+            if(input.name === name){
+                input.value[0] = value; 
+            }
+        });
+        this.setState({fields: updatedFields, rating: value});
+    }
+   
+    //checks for empty value fields for required inputs
+    //sets error if required fields is found
+    //if no error is found, updates steps and renders next step of the form
     handleNext(){
-        if(this.state.step < this.props.maxSteps) this.setState(prev => ({step: prev.step+1}))    
+        let { step, error } = this.state;
+        const { maxSteps } = this.props;
+
+        if(step < maxSteps) {
+            let err = this.handleError(step);
+            if(err){
+                error[step] = "One or more fields are incomplete";
+                this.setState({error});
+            }
+            else{
+                error[step] = "";
+                this.setState(prev => ({error, step: prev.step+1}));   
+            }
+        }
+
     }
 
     handlePrev(){
         if(this.state.step !== 1) this.setState(prev => ({step: prev.step-1}))  
     }
 
-    handleOnChange(e){
-        e.preventDefault();
-        const { name, value, placeholder } = e.target;
-        this.state.fields.forEach((form, i) => {
-            form.forEach((field, j) => {
-                if(field.name === name){
-                    let updatedFields = this.state.fields;
-                    if(field.placeholder.length > 1) {
-                        const index = field.placeholder.findIndex((e)=> e === placeholder);
-                        updatedFields[i][j].value[index] = value;
-                    }
-                    else { 
-                        updatedFields[i][j].value = value; 
-                    }
-                    this.setState({ fields: updatedFields });
-                }
-            });
-        });
+    //checks if a required field has an empty value
+    handleError(index){
+        let err = false;
+        this.state.fields[index-1].forEach(field => {
+            if(field.required){
+                console.log(field.value);
+                field.value.forEach(value => {
+                    if(!value) err = true 
+                });
+            }
+        }); 
+        return err;
     }
 
     render(){
-        const body = this.state.fields && this.state.fields.map((field, i) => {
-            if(this.state.step === i+1){
+        const { fields, step, radioValue, rating, error} = this.state;
+        const { maxSteps, headerText } = this.props;
+
+        //Renders field groups from fields based on step value
+        const body = fields && fields.map((fieldGroup, i) => {
+            if(step === i+1){
                 return (
                     <FormGroup  
-                        fields={field} 
+                        fieldGroup={fieldGroup} 
+                        radioValue = {radioValue}
+                        rating = {rating}
+                        error = {error[step]}
                         handleOnChange={this.handleOnChange}
-                        key={this.state.step}
+                        handleRating = {this.handleRating}
                     />
                 )}
         });
 
-        const button =  this.props.maxSteps > 1 
-            ?<Buttons 
-                step={this.state.step} 
-                maxSteps={this.props.maxSteps} 
-                handlePrev={this.handlePrev} 
-                handleNext={this.handleNext} 
-                handleSubmit={this.handleSubmission}
-            />
-            : <Button marginLeft={'40'} onClick={this.handleSubmission}>{this.props.headerText}</Button>
-
+        //renders button component if multistep form or a single button for single page form
+        const button =  (
+                maxSteps > 1 
+                ?<Buttons 
+                    step={step} 
+                    maxSteps={maxSteps} 
+                    handlePrev={this.handlePrev} 
+                    handleNext={this.handleNext} 
+                    handleSubmit={this.handleSubmission}
+                />
+                :<Button 
+                    marginLeft={'40'} 
+                    onClick={this.handleSubmission}
+                    >{headerText}
+                </Button>
+        );
 
         return(
             <FormCard
-                header = {this.props.headerText}
+                header = {headerText}
                 body= {body}                
                 footer={button}
                 maxHeight={'800'}
@@ -191,12 +331,94 @@ class MultiStepForm extends React.Component {
     
 }
 
+const FormGroup = ({ fieldGroup, radioValue, rating, error, handleRating, handleOnChange }) => {
+    const values = fieldGroup.map(field => {
+        const inputs = field.placeholder.map((placeholderText, i) => {
+            if(field.inputType === 'textarea'){
+                return (
+                    <Textarea 
+                        name={field.name} 
+                        value={field.value} 
+                        placeholder={placeholderText} 
+                        type={field.type} 
+                        onChange={handleOnChange}
+                    />
+                );
+            }
+            else if(field.inputType === 'rating'){
+                return (
+                    <StyledRating
+                        name="simple-controlled"
+                        value={rating}
+                        onChange={(event, newValue) => {
+                            handleRating(event, newValue, field.name);
+                        }}
+                    />
+                );
+            }
+            else if(field.type === 'radio'){
+                return (
+                    <RadioButton 
+                        field={field} 
+                        handleOnChange={handleOnChange}
+                        radioValue = {radioValue}
+                    />
+                );
+            }
+            else if (field.type === 'file') {
+                return <UploadImage />
+            }
+
+            else { 
+                return ( 
+                    <Input 
+                        name={field.name} 
+                        value={field.value[i]} 
+                        placeholder={placeholderText} 
+                        type={field.type} 
+                        onChange={handleOnChange}
+                    />
+                );
+            }
+        });
+
+        return (
+            <InputGroup>
+                <Label>{field.label} {field.required && <>*</>}</Label>
+                <div>{inputs}</div>
+            </InputGroup>
+        );
+    });
+    
+    return(
+        <Container>
+            {values}
+            <InputGroup>
+                { 
+                    error &&  <Error>{error}</Error> 
+                }
+            </InputGroup>
+        </Container>
+    )
+
+}
+
+//determines footer buttons based on maxSteps
 const Buttons = ({step, maxSteps, ...props}) => {
     return(
         <>
-            <Button onClick={props.handlePrev} disabled={!step===1}>prev</Button> 
-            {step < maxSteps
-                ? <Button marginLeft={'70'} onClick={props.handleNext}>next</Button>
+            <Button 
+                onClick={props.handlePrev} 
+                disabled={!step===1}
+                >prev
+            </Button> 
+
+            { step < maxSteps
+                ?<Button 
+                    marginLeft={'70'} 
+                    onClick={props.handleNext}
+                    >next
+                </Button>
                 : <Button 
                     background={theme.colorMap.darkGrey2}
                     color={theme.colorMap.cream}
@@ -209,53 +431,29 @@ const Buttons = ({step, maxSteps, ...props}) => {
     );
 }
 
-
-const FormGroup = ({fields, handleOnChange, ...props}) => {
-    const values = fields.map(field => {
-        const inputs = field.placeholder.map((placeholderText, i) => {
-            
-            if(field.inputType === 'textarea'){
-                return (
-                    <Textarea 
-                        name={field.name} 
-                        value={field.value} 
-                        placeholder={placeholderText} 
-                        type={field.type} 
-                        onChange={(e) => handleOnChange(e, field.name)}
-                    />
-                );
-            }
-            return ( field.placeholder.length > 1 
-                ?<Input 
-                    name={field.name} 
-                    value={field.value[i]} 
-                    placeholder={placeholderText} 
-                    type={field.type} 
-                    onChange={(e) => handleOnChange(e, field.name)}
-                />
-                :<Input 
-                    name={field.name} 
-                    value={field.value} 
-                    placeholder={placeholderText} 
-                    type={field.type} 
-                    onChange={(e) => handleOnChange(e, field.name)}
-                />
-            );
-        });
+//creates radio buttons for inputs with type radio
+const RadioButton = ({field, radioValue, handleOnChange}) => {
+    const input = field.radiolabel.map(value => {
         return (
-            <InputGroup>
-                <Label>{field.label}</Label>
-                {inputs}
-            </InputGroup>
+            <div>
+                <input 
+                    type="radio" 
+                    id={field.name} 
+                    name={field.name} 
+                    value={value} 
+                    checked={radioValue[field.name] === value} 
+                    onChange={handleOnChange}
+                />
+                <Label htmlFor={field.name}>{value}</Label>
+            </div>
         );
-    });
-    return(
-        <Container>
-            {values}
-        </Container>
-    )
+    })
 
+    return (
+        <div style={{display: 'flex', justifyContent: 'space-between', width:'50%', marginLeft: '8px'}}>
+            {input}
+        </div>
+    );
 }
 
-
-export default MultiStepForm;
+export default Form;

@@ -1,23 +1,26 @@
 import React from 'react';
-import MultiStepForm from '../components/form';
+import Form from '../components/form';
 
 const SignIn = () => {
 
-    const handleSubmit = (e, formData) => {
-        e.preventDefault();
-        console.log("Submitted");
+    const handleSubmit = (formData) => {
         console.log("Recieved", formData);
 
     }
 
     const fields = [
             [
-                { name:'email', value: '', placeholder: [""], label: "Email", type: "text" },
-                { name: 'password',  value: [], placeholder: [""], label: "Password", type: "text" }
+                { name:'email', value: [''], placeholder: [''], label: 'Email', type: 'text', required: true},
+                { name: 'password',  value: [''], placeholder: [''], label: "Password", type: 'password', required: true }
             ]
     ];
     return(
-        <MultiStepForm fields={fields} maxSteps={1} headerText={"Sign In"} handleSubmit={handleSubmit}/>
+        <Form 
+            fields={fields} 
+            maxSteps={1} 
+            headerText={'Sign In'} 
+            handleSubmit={handleSubmit}
+        />
     );
 }
 

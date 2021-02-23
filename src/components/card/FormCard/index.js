@@ -21,7 +21,7 @@ const Header = styled.div`
   font-size: ${theme.fontSize.medium};
   font-weight: bold;
   border-bottom: 1px solid ${theme.colorMap.mustardYellow};
-  padding: ${theme.size.xmediumLarge} 0;
+  padding: ${theme.size.mediumLarge} 0;
   text-align: center;
   @media ${theme.screenSize.upToLarge} {
     font-size: ${theme.fontSize.small};
