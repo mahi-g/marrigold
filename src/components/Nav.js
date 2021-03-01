@@ -1,11 +1,27 @@
 import React from 'react'
 import styled from '@emotion/styled'
 import { theme } from '../theme'
+import marigold from "../images/marigold.png";
 
-const Logo = styled.h2`
+const Logo = styled.a`
+    display: flex;
+    text-decoration: none;
+`
+const LogoText = styled.div`
+    color: black;
     font-family: ${theme.fontFamily.logo}, sans-serif;
+    font-size: ${theme.fontSize.large};
+    padding-top: ${theme.fontSize.tiny};
     text-align: left;
 `
+
+const LogoImg = styled.img`
+    width: 2.5vw;
+    height: auto;
+    margin: auto;
+    padding-top: ${theme.fontSize.tiny};
+`
+
 const Ul = styled.ul`
     display: flex;
     justify-content: space-around;
@@ -47,7 +63,15 @@ const NavBar = styled.div`
 const Nav = () => {
     return (
         <NavBar>
-            <Logo>Marrigold</Logo>
+            <Logo href='/'>
+                <LogoImg
+                    alt="Marigold" 
+                    src={marigold} 
+                />
+                <LogoText>
+                    Marrygold
+                </LogoText>
+            </Logo>
             <Ul>
                 <Li><Link href="#">Local Vendors</Link></Li>
                 <Li><Link href="#">Contact Us</Link></Li>

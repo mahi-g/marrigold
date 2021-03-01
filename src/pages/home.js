@@ -192,19 +192,6 @@ const Home = () => (
           alt="Strings of flowers" 
           src={string} 
         />
-    
-        {/*
-        
-        <Img 
-          alt="Strings of flowers" 
-          src={string} 
-          css= {css`
-            width: 25vw;
-            height: auto;
-            margin: auto;
-          `}
-        />
-        */}
         
       </SectionThree>
     </>
