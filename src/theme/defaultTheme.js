@@ -104,6 +104,7 @@ const fontFamily = {
     body: `Raleway`,
     logo: `Arya`,
     formHeader: `Roboto`,
+    label: 'Open Sans, sans-serif'
 };
 
 export const theme = {

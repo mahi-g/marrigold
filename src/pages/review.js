@@ -10,7 +10,7 @@ const Review = () => {
 
     const fields = [
             [
-                { name:'rating', value: [''], placeholder: [''], label: 'Your Rating', type: 'text', inputType: "rating", required: true },
+                { name:'rating', value: [''], placeholder: [''], label: 'Overall exerience with this vendor', type: 'text', inputType: "rating", required: true },
 
                 { name:'review', value: [''], placeholder: ['Share your honest opinion'], label: '', type: 'text', inputType: 'textarea' },
             

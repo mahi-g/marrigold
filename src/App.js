@@ -34,8 +34,8 @@ const Container = styled('div')`
     height: 100%;
     margin: 0;
     padding: 0;
-    color: ${theme.colorMap.darkGrey2};
     font-family: ${theme.fontFamily.body};
+    color: ${theme.colorMap.darkGrey2};
     background:  ${theme.colorMap.mustardYellow};
     overflow-x: hidden;
 `;

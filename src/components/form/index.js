@@ -7,8 +7,10 @@ import { Rating } from '@material-ui/lab';
 import WarningIcon from '@material-ui/icons/Warning';
 
 const INPUT_WIDTH = '380px';
-const CONTAINER_WIDTH = '400px';
-const CONTAINER_HEIGHT = '480px';
+const CONTAINER_WIDTH = '380px';
+const CONTAINER_HEIGHT = '460px';
+const CARD_HEIGHT = '620';
+const CARD_WIDTH = '500'
 
 const Container = styled.div`
     width: ${CONTAINER_WIDTH};
@@ -64,7 +66,8 @@ const InputGroup = styled.div`
     }
 `
 const Label = styled.label`
-    font-weight: bold;
+    font-family: ${theme.fontFamily.label};
+    font-weight: ${ ({ bold }) => bold ? bold : '600' };
     font-size: ${theme.fontSize.tiny};
     margin-top: ${theme.size.small};
     padding-left: ${theme.size.small};
@@ -77,7 +80,7 @@ const Label = styled.label`
 const Input = styled.input`
     border: none;
     border-radius: ${theme.size.tiny};
-    height: 25px;
+    height: 18px;
     width: ${INPUT_WIDTH};
     padding: ${theme.size.small};
     margin: ${theme.size.xsmall};
@@ -111,30 +114,30 @@ const Textarea = styled.textarea`
     }
 `
 const StyledRating = styled(Rating)`
-    margin-left: ${theme.size.xsmall};
+    padding: ${theme.size.small} ${theme.size.xsmall};
 `
 
 const Error = styled.div`
     display: flex;
-    font-size: ${theme.fontSize.tiny};
+    font-size: 12px;
     color: ${theme.colorMap.red};
     background: rgb(214, 69, 49, 0.3);
-    padding: ${theme.size.small};
-    margin: ${theme.size.xsmall} auto;
+    padding: ${theme.size.xsmall};
+    margin: ${theme.size.small} auto;
     width: ${INPUT_WIDTH};
-
     & > div {
         margin: 0 2px; 
         padding-top: 4px;
-        width: 100%;
+        width: inherit;
     }
     @media ${theme.screenSize.upToLarge} {
-        margin-right: ${theme.size.large};
+        margin: 0 ${theme.size.small};
         width: 90%;
     }
     @media ${theme.screenSize.upToSmall} {
         margin-right: 2px;
-        width: 90%;
+        width: 98%;
+        font-size: 10px;
     }
     
 `
@@ -300,10 +303,10 @@ class Form extends React.Component {
                 header = {headerText}
                 body= {body}                
                 footer={button}
-                maxHeight={'800'}
-                height={'650'}
-                maxWidth={'600'}
-                width={'500'}
+                maxHeight={'700'}
+                height={CARD_HEIGHT}
+                maxWidth={'500'}
+                width={CARD_WIDTH}
             />
         );
     }
@@ -428,13 +431,13 @@ const RadioButton = ({field, radioValue, handleOnChange}) => {
                     checked={radioValue[field.name] === value} 
                     onChange={handleOnChange}
                 />
-                <Label htmlFor={field.name}>{value}</Label>
+                <Label bold={'300'} htmlFor={field.name}>{value}</Label>
             </div>
         );
     })
 
     return (
-        <div style={{display: 'flex', justifyContent: 'space-between', width:'50%', margin: '2px 5px'}}>
+        <div style={{display: 'flex', justifyContent: 'space-between', width:'50%', padding: '12px 3px'}}>
             {input}
         </div>
     );

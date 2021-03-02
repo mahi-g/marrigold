@@ -11,7 +11,7 @@ const Contact = () => {
         [
             { name:'name', value: [''], placeholder: ['Jane Smith'], label: 'Full Name', type: 'text' },
             { name: 'email',  value: [''], placeholder: ['janesmith@email.com'], label: 'Email', type: 'text', required: true},
-            { name: 'date',  value: [''], placeholder: ['mm/dd/yy'], label: 'Wedding Date', type: 'text', required: true }
+            { name: 'date',  value: [''], placeholder: ['mm/dd/yy'], label: 'Wedding Date', type: 'date', required: true }
         ],
         [
             { name:'details', value:[''], placeholder: ["Provide specific details about the services you're looking for"], label: 'Details', type: 'text', inputType: 'textarea'},
@@ -27,7 +27,7 @@ const Contact = () => {
         ]
     ];
 
-    return(
+    return (
         <Form 
             fields={fields} 
             maxSteps={4} 
