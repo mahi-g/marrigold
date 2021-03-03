@@ -28,6 +28,10 @@ const LoadableContactPage = lazy(() =>
     import( './pages/contact')
 );
 
+const LoadableReviewPage = lazy(() =>
+    import( './pages/review')
+);
+
 const Container = styled('div')`
     width: 100vw;
     min-height: 100vh;
@@ -62,6 +66,10 @@ const App = () => (
                             <Route
                                 path="/contact"
                                 component={LoadableContactPage}
+                            />
+                            <Route
+                                path="/review"
+                                component={LoadableReviewPage}
                             />
                             <Route
                                 path="/"

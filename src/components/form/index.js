@@ -358,6 +358,7 @@ const FormGroup = ({ fieldGroup, radioValue, rating, error, handleRating, handle
                         value={field.value[i]} 
                         placeholder={placeholderText} 
                         type={field.type} 
+                        pattern={field.pattern}
                         onChange={handleOnChange}
                     />
                 );
