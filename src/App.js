@@ -16,14 +16,30 @@ const LoadableTestPage = lazy(() =>
     import( './pages/test')
 );
 
+const LoadableSignUpPage = lazy(() =>
+    import( './pages/signup')
+);
+
+const LoadableLoginPage = lazy(() =>
+    import( './pages/signin')
+);
+
+const LoadableContactPage = lazy(() =>
+    import( './pages/contact')
+);
+
+const LoadableReviewPage = lazy(() =>
+    import( './pages/review')
+);
+
 const Container = styled('div')`
     width: 100vw;
     min-height: 100vh;
     height: 100%;
     margin: 0;
     padding: 0;
-    color: ${theme.colorMap.darkGrey2};
     font-family: ${theme.fontFamily.body};
+    color: ${theme.colorMap.darkGrey2};
     background:  ${theme.colorMap.mustardYellow};
     overflow-x: hidden;
 `;
@@ -38,6 +54,22 @@ const App = () => (
                             <Route
                                 path="/test"
                                 component={LoadableTestPage}
+                            />
+                            <Route
+                                path="/signin"
+                                component={LoadableLoginPage}
+                            />
+                            <Route
+                                path="/signup"
+                                component={LoadableSignUpPage}
+                            />
+                            <Route
+                                path="/contact"
+                                component={LoadableContactPage}
+                            />
+                            <Route
+                                path="/review"
+                                component={LoadableReviewPage}
                             />
                             <Route
                                 path="/"

@@ -54,8 +54,8 @@ const Link = styled.a`
 const NavBar = styled.div`
     display: flex;
     justify-content: space-between;
-    margin: 5%;
-    margin-top: 0;
+    margin: ${theme.size.medium} ${theme.size.mediumLarge};
+    padding: 0 ${theme.size.medium};
     width: 95vw;
     background: ${theme.colorMap.mustardYellow};
 `

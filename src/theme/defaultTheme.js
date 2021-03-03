@@ -56,10 +56,13 @@ const colorMap = {
     cream: '#FFF6C8',
     darkGrey: '#464541',
     darkGrey2: '#333333', /* for inner text*/
+    green: '#5DBA7F',
     lightGrey: '#9E9898',
     mustardYellow: '#EAC85E',
     orange: '#FEA91D',
+    red: '#D64531',
     white: '#FFFFFF',
+    
 
 };
 
@@ -101,6 +104,7 @@ const fontFamily = {
     body: `Raleway`,
     logo: `Arya`,
     formHeader: `Roboto`,
+    label: 'Open Sans, sans-serif'
 };
 
 export const theme = {
