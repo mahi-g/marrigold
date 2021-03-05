@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import styled from '@emotion/styled'
-import { theme } from '../theme'
-import marigold from '../images/marigold.png'
+import { theme } from '../../theme'
+import marigold from '../../images/marigold.png'
 import AccountCircleRoundedIcon from '@material-ui/icons/AccountCircleRounded';
 import CloseIcon from '@material-ui/icons/Close';
-import MediaQueries from '../hooks/MediaQueries'
+import MediaQueries from '../../hooks/MediaQueries'
 import MenuIcon from '@material-ui/icons/Menu'
 import LockOpenRoundedIcon from '@material-ui/icons/LockOpenRounded';
 import StorefrontIcon from '@material-ui/icons/Storefront';
@@ -80,6 +80,7 @@ const NavBar = styled.div`
 const MobileNavBar = styled.div`
     z-index: 200;
     height: 100vh;
+    padding-bottom: 2px;
     width: ${MOBILE_NAV_WIDTH};
     background: ${theme.colorMap.darkGrey2};
     color: ${theme.colorMap.white};
@@ -117,15 +118,15 @@ const Icon = styled.div`
 `
 const Profile = styled.div`
     width: 140px;
-    font-size: 20px;
-    padding-left: 70px;
-    padding-right: 0px;
-    padding-bottom: 15px;
-    margin: 0 30px;
+    font-size: ${theme.fontSize.medium};
+    padding: ${theme.size.default} 70px;
+    padding-right: 0;
+    padding-top: 0;
+    margin: 0 ${theme.size.xmediumLarge};
     border-bottom: 0.5px solid white;
 `
 const Email = styled.div`
-    font-size: 10px;
+    font-size: ${theme.fontSize.micro};
 `
 
 const Nav = () => {
