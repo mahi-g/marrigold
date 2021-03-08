@@ -1,14 +1,14 @@
 import React, { useState } from 'react'
+import { useMediaQueries } from '../../hooks/MediaQueries'
 import styled from '@emotion/styled'
 import { theme } from '../../theme'
-import marigold from '../../images/marigold.png'
-import AccountCircleRoundedIcon from '@material-ui/icons/AccountCircleRounded';
-import CloseIcon from '@material-ui/icons/Close';
-import MediaQueries from '../../hooks/MediaQueries'
+import AccountCircleRoundedIcon from '@material-ui/icons/AccountCircleRounded'
+import CloseIcon from '@material-ui/icons/Close'
 import MenuIcon from '@material-ui/icons/Menu'
-import LockOpenRoundedIcon from '@material-ui/icons/LockOpenRounded';
-import StorefrontIcon from '@material-ui/icons/Storefront';
-import TextsmsRoundedIcon from '@material-ui/icons/TextsmsRounded';
+import LockOpenRoundedIcon from '@material-ui/icons/LockOpenRounded'
+import StorefrontIcon from '@material-ui/icons/Storefront'
+import TextsmsRoundedIcon from '@material-ui/icons/TextsmsRounded'
+import marigold from '../../images/marigold.png'
 
 const IS_LOGGED_IN = true;
 const user = {
@@ -17,7 +17,7 @@ const user = {
 }
 
 const MOBILE_NAV_WIDTH = '280px';
-const BURGER_BUTTON = '50px';
+const BURGER_BUTTON_SIZE = '50px';
 const MOBILE_LI_WIDTH = '200px';
 
 const Logo = styled.a`
@@ -28,32 +28,33 @@ const LogoText = styled.div`
     color: black;
     font-family: ${theme.fontFamily.logo}, sans-serif;
     font-size: ${theme.fontSize.large};
-    padding-top: ${theme.fontSize.tiny};
+    padding-top: ${theme.fontSize.medium};
     text-align: left;
 `
 const LogoImg = styled.img`
     width: 30px;
     height: auto;
     margin: auto;
-    padding-bottom: ${theme.fontSize.tiny};
+    padding-bottom: ${theme.fontSize.small};
     @media ${theme.screenSize.upToLarge} {
         width: 30px;
         padding-bottom: 0;
-        padding-top: ${theme.fontSize.tiny};
+        padding-top: ${theme.fontSize.medium};
     }
 `
 const Ul = styled.ul`
     display: flex;
     flex-direction: ${ ({column}) => column ? 'column' : 'row' };
     justify-content: space-around;
-    width: 35%;
+    width: 400px;
     @media ${theme.screenSize.upToLarge} {
         width: 76%;
         padding: ${theme.size.large};
     }
 `
 const Li = styled.li`
-    padding: 4%;
+    width: 120px;
+    padding: 24px 2px;
     list-style-type:none;
     text-align: center;
     text-transform: uppercase;
@@ -68,6 +69,9 @@ const Li = styled.li`
 const Link = styled.a`
     text-decoration: none;
     color: ${ ({color}) => color ? color : theme.colorMap.darkGrey2};
+    &:hover {
+        color: ${theme.colorMap.cream};
+    }
 `
 const NavBar = styled.div`
     display: flex;
@@ -93,8 +97,8 @@ const MobileNavBar = styled.div`
     }
 `
 const BurgerButton = styled.button`
-    width: ${BURGER_BUTTON};
-    height: ${BURGER_BUTTON};
+    width: ${BURGER_BUTTON_SIZE};
+    height: ${BURGER_BUTTON_SIZE};
     border: none;
     padding-top: ${theme.size.mediumLarge};
     padding-right: ${theme.size.xlarge};
@@ -130,7 +134,7 @@ const Email = styled.div`
 `
 
 const Nav = () => {
-    const screen = MediaQueries();
+    const screenSize = useMediaQueries();
     const [open, setOpen] = useState(false);
     const showSidebar = () => {
         setOpen(!open);
@@ -148,17 +152,17 @@ const Nav = () => {
                     </LogoText>
                 </Logo>
             {
-                screen <= 1023 
+                screenSize <= 1023 
                 ?<BurgerButton onClick={showSidebar}> { open ? <CloseIcon /> : <MenuIcon /> }</BurgerButton>
                 :<Ul>
                     <Li><Link href="#">Local Vendors</Link></Li>
                     <Li><Link href="#">Contact Us</Link></Li>
-                    <Li><Link href="/signin">Sign In</Link></Li>
+                    <Li><Link href="/signin">Vendor Sign In</Link></Li>
                 </Ul>
             }
             </NavBar>
         { 
-            screen <= 1023 &&
+            screenSize <= 1023 &&
             <MobileNavBar transform={ open ? 'true' : ''}>
                 <MobileLinks />
             </MobileNavBar>
@@ -196,7 +200,7 @@ const MobileLinks = () => (
             <Li>
                 <Link  color = { theme.colorMap.white } href="/signin">
                    <Icon><LockOpenRoundedIcon fontSize='small'/></Icon> 
-                    Sign In
+                    Vendor Sign In
                 </Link>
             </Li>
         </Ul>
