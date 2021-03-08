@@ -49,7 +49,7 @@ const Ul = styled.ul`
     width: 400px;
     @media ${theme.screenSize.upToLarge} {
         width: 76%;
-        padding: ${theme.size.large};
+        padding: ${theme.size.small} 0;
     }
 `
 const Li = styled.li`
@@ -61,7 +61,7 @@ const Li = styled.li`
     font-size: ${theme.fontSize.tiny};
     @media ${theme.screenSize.upToLarge} {
         font-size: ${theme.fontSize.tiny};
-        padding: ${theme.size.xsmall} ${theme.size.xlarge};
+        padding: ${theme.size.tiny} ${theme.size.xlarge};
         text-align: left;
         width: ${MOBILE_LI_WIDTH};
     }
@@ -121,13 +121,13 @@ const Icon = styled.div`
     left: ${ ({left}) => left ? `${left}px` : '-36px' };
 `
 const Profile = styled.div`
-    width: 140px;
+    width: 150px;
     font-size: ${theme.fontSize.medium};
-    padding: ${theme.size.default} 70px;
+    padding: ${theme.size.default} 50px;
     padding-right: 0;
     padding-top: 0;
     margin: 0 ${theme.size.xmediumLarge};
-    border-bottom: 0.5px solid white;
+    border-bottom: 1px solid white;
 `
 const Email = styled.div`
     font-size: ${theme.fontSize.micro};
