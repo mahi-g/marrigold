@@ -5,7 +5,7 @@ import { ThemeProvider } from '@emotion/react';
 import styled from '@emotion/styled';
 import Loading from './components/graphics/loading-graphics';
 import { theme } from './theme';
-import Nav from './components/Nav.js';
+import Nav from './components/nav';
 import './index.css';
 
 const LoadableHomePage = lazy(() =>
