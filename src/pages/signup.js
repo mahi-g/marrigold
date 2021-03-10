@@ -16,6 +16,8 @@ const SignUp = () => {
             ],
             [
                 { name:'details', value: [''], placeholder: ['List specific details about the services provided'], label: 'Details', type: 'text', inputType: 'textarea', required: false },
+                { name:'social', value: ['', ''], placeholder: ['Instagram', 'Facebook'], label: 'Link Social Media', type: 'text', required: false },
+
             ],
             [
                 { name:'contact', value:[''], placeholder: ['xxx-xxx-xxxx'], label: 'Contact', type: 'tel', pattern: '[0-9]{3}-[0-9]{3}-[0-9]{4}', required: true },

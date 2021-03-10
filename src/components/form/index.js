@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { theme } from '../../theme';
-import UploadImage from '../images';
 import FormCard from '../card/FormCard';
+import UploadImage from '../images';
 import { Rating } from '@material-ui/lab';
 import WarningIcon from '@material-ui/icons/Warning';
 
@@ -20,7 +20,7 @@ const Container = styled.div`
     margin: 20px auto;
 
     @media ${theme.screenSize.upToLarge} {
-        width: 90%;
+        width: 95%;
         margin: 0 auto;
         height: 80%;
       }
@@ -58,7 +58,7 @@ const InputGroup = styled.div`
         display: flex;
         justify-content: space-between;
     }
-    
+
     @media ${theme.screenSize.upToLarge} {
         font-size: ${theme.fontSize.small};
         margin:  ${theme.size.tiny} auto;
@@ -69,15 +69,15 @@ const Label = styled.label`
     font-family: ${theme.fontFamily.label};
     font-weight: ${ ({ bold }) => bold ? bold : '600' };
     font-size: ${theme.fontSize.tiny};
-    margin-top: ${theme.size.small};
+    margin-top: ${theme.size.xsmall};
     padding-left: ${theme.size.small};
 
     @media ${theme.screenSize.upToLarge} {
-        margin-top: ${theme.size.xsmall};
         font-size: ${theme.fontSize.tiny};
     }
 `
 const Input = styled.input`
+    font-family: ${theme.fontFamily.label};
     border: none;
     border-radius: ${theme.size.tiny};
     height: 18px;
@@ -90,9 +90,13 @@ const Input = styled.input`
         border: 1px solid ${theme.colorMap.mustardYellow};
         border-radius: ${theme.size.xsmall};
     }
+    &::-webkit-input-placeholder {
+        font-size: 14px;
+        font-family: ${theme.fontFamily.label};
+    }
     @media ${theme.screenSize.upToLarge} {
-        width: 85%;
-        height: 20px;
+        width: 95%;
+        height: 40px;
     }
 `
 const Textarea = styled.textarea`
@@ -100,7 +104,7 @@ const Textarea = styled.textarea`
     border-radius: ${theme.size.xsmall};
     height: 80px;
     width: ${INPUT_WIDTH};
-    font-family: Arial;
+    font-family: ${theme.fontFamily.label};
     padding: ${theme.size.small};
     margin: ${theme.size.xsmall};
 
@@ -109,8 +113,12 @@ const Textarea = styled.textarea`
         border: 1px solid ${theme.colorMap.mustardYellow};
         border-radius: ${theme.size.xsmall};
     }
+    &::-webkit-input-placeholder {
+        font-size: 14px;
+        font-family: ${theme.fontFamily.label};
+    }
     @media ${theme.screenSize.upToLarge} {
-        width: 85%;
+        width: 95%;
     }
 `
 const StyledRating = styled(Rating)`
@@ -438,7 +446,7 @@ const RadioButton = ({field, radioValue, handleOnChange}) => {
     })
 
     return (
-        <div style={{display: 'flex', justifyContent: 'space-between', width:'50%', padding: '12px 3px'}}>
+        <div style={{display: 'flex', justifyContent: 'space-between', width:'60%', padding: '12px'}}>
             {input}
         </div>
     );
