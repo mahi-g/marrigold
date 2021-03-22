@@ -9,6 +9,8 @@ import LockOpenRoundedIcon from '@material-ui/icons/LockOpenRounded'
 import StorefrontIcon from '@material-ui/icons/Storefront'
 import TextsmsRoundedIcon from '@material-ui/icons/TextsmsRounded'
 import marigold from '../../images/marigold.png'
+import 'antd/dist/antd.css';
+
 
 const IS_LOGGED_IN = true;
 const user = {
@@ -18,7 +20,7 @@ const user = {
 
 const MOBILE_NAV_WIDTH = '280px';
 const BURGER_BUTTON_SIZE = '50px';
-const MOBILE_LI_WIDTH = '200px';
+const MOBILE_LI_WIDTH = '250px';
 
 const Logo = styled.a`
     display: flex;
@@ -35,7 +37,7 @@ const LogoImg = styled.img`
     width: 30px;
     height: auto;
     margin: auto;
-    padding-bottom: ${theme.fontSize.small};
+    padding-bottom: ${theme.size.medium};
     @media ${theme.screenSize.upToLarge} {
         width: 30px;
         padding-bottom: 0;
@@ -48,13 +50,13 @@ const Ul = styled.ul`
     justify-content: space-around;
     width: 400px;
     @media ${theme.screenSize.upToLarge} {
-        width: 76%;
+        width: 80%;
         padding: ${theme.size.small} 0;
     }
 `
 const Li = styled.li`
     width: 120px;
-    padding: 24px 2px;
+    padding: 30px 2px;
     list-style-type:none;
     text-align: center;
     text-transform: uppercase;
@@ -77,8 +79,8 @@ const NavBar = styled.div`
     display: flex;
     justify-content: space-between;
     margin: 0;
-    padding: 0 ${theme.size.medium};
-    width: 95vw;
+    padding: ${theme.size.small} ${theme.size.xlarge};
+    width: 100vw;
     background: ${theme.colorMap.mustardYellow};
 `
 const MobileNavBar = styled.div`
@@ -117,11 +119,11 @@ const BurgerButton = styled.button`
 `
 const Icon = styled.div`
     position: relative;
-    bottom: ${ ({bottom}) => bottom ? `${bottom}px` : '-20px' };
+    bottom: ${ ({bottom}) => bottom ? `${bottom}px` : '-25px' };
     left: ${ ({left}) => left ? `${left}px` : '-36px' };
 `
 const Profile = styled.div`
-    width: 150px;
+    width: 200px;
     font-size: ${theme.fontSize.medium};
     padding: ${theme.size.default} 50px;
     padding-right: 0;
@@ -175,7 +177,7 @@ const MobileLinks = () => (
     <>
         {
             IS_LOGGED_IN && <Profile>
-                <Icon bottom="-40" left="-50">
+                <Icon bottom="-50" left="-50">
                     <AccountCircleRoundedIcon fontSize="large"/>
                 </Icon>
                 <div>

@@ -8,7 +8,7 @@ import WarningIcon from '@material-ui/icons/Warning';
 
 const INPUT_WIDTH = '380px';
 const CONTAINER_WIDTH = '380px';
-const CONTAINER_HEIGHT = '460px';
+const CONTAINER_HEIGHT = '450px';
 const CARD_HEIGHT = '620';
 const CARD_WIDTH = '500'
 
@@ -24,15 +24,14 @@ const Container = styled.div`
         margin: 0 auto;
         height: 80%;
       }
-    
 `
 const Button = styled.button`
     background: ${({background}) => background ? `${background}` : theme.colorMap.cream};
     border: 1px solid ${theme.colorMap.cream};
     border-radius: ${theme.size.small};
-    width: 20%;
+    width: 75px;
     margin-left: ${({marginLeft}) => marginLeft ? `${marginLeft}%` : `0%`};
-    padding: 5px 8px;
+    padding: 2px 8px;
     font-size: ${theme.fontSize.small};
     color: ${({color}) => color ? `${color}` : theme.colorMap.mustardYellow};
 
@@ -80,7 +79,7 @@ const Input = styled.input`
     font-family: ${theme.fontFamily.label};
     border: none;
     border-radius: ${theme.size.tiny};
-    height: 18px;
+    height: 40px;
     width: ${INPUT_WIDTH};
     padding: ${theme.size.small};
     margin: ${theme.size.xsmall};
@@ -96,7 +95,6 @@ const Input = styled.input`
     }
     @media ${theme.screenSize.upToLarge} {
         width: 95%;
-        height: 40px;
     }
 `
 const Textarea = styled.textarea`
@@ -161,6 +159,7 @@ class Form extends React.Component {
         }
         this.handleSubmission = this.handleSubmission.bind(this);
         this.handleOnChange = this.handleOnChange.bind(this);
+        this.handleImageFiles = this.handleImageFiles.bind(this);
         this.handleRating = this.handleRating.bind(this);
         this.handleNext = this.handleNext.bind(this);
         this.handlePrev = this.handlePrev.bind(this);
@@ -195,7 +194,8 @@ class Form extends React.Component {
             step:1, 
             radioValue:{},
             error: {},
-            rating: 1
+            rating: 1,
+            files: []
         }));
     }
 
@@ -218,6 +218,11 @@ class Form extends React.Component {
                 this.setState({ fields: updatedFields });
             }
         });
+    }
+
+    handleImageFiles(files){
+        this.setState(files);
+        console.log(this.state);
     }
 
     handleRating(e , value, name){
@@ -285,6 +290,7 @@ class Form extends React.Component {
                         error = {error[step]}
                         handleOnChange={this.handleOnChange}
                         handleRating = {this.handleRating}
+                        handleImageFiles = {this.handleImageFiles}
                     />
                 )}
         });
@@ -321,7 +327,7 @@ class Form extends React.Component {
     
 }
 
-const FormGroup = ({ fieldGroup, radioValue, rating, error, handleRating, handleOnChange }) => {
+const FormGroup = ({ fieldGroup, radioValue, rating, error, handleRating, handleOnChange, handleImageFiles }) => {
     const values = fieldGroup.map(field => {
         const inputs = field.placeholder.map((placeholderText, i) => {
             if(field.inputType === 'textarea'){
@@ -356,7 +362,7 @@ const FormGroup = ({ fieldGroup, radioValue, rating, error, handleRating, handle
                 );
             }
             else if (field.type === 'file') {
-                return <UploadImage />
+                return <UploadImage  handleImageFiles={handleImageFiles}/>
             }
 
             else { 

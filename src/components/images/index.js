@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { theme } from '../../theme';
 import styled from '@emotion/styled';
@@ -7,13 +6,12 @@ import PlusOutlined from '@ant-design/icons';
 import './images.css';
 import 'antd/dist/antd.css';
 
-
-// {
+//[ {
 //   uid: '-1',
 //   name: 'image.png',
 //   status: 'done',
 //   url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-// }
+// }]
 
 const ImageContainer = styled.div`
   margin-left: 10px;
@@ -37,12 +35,18 @@ class UploadImage extends React.Component {
   state = {
     previewVisible: false,
     previewImage: '',
-    fileList: [],
+    fileList: this.props.fileList || [{
+        uid: '-1',
+        name: 'image.png',
+        status: 'done',
+        url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+    }]
   };
 
   handleCancel = () => this.setState({ previewVisible: false });
 
   handlePreview = async file => {
+    console.log(file);
     if (!file.url && !file.preview) {
       file.preview = await getBase64(file.originFileObj);
     }
@@ -53,14 +57,17 @@ class UploadImage extends React.Component {
     });
   };
 
-  handleChange = ({ fileList }) => this.setState({ fileList });
+  handleChange = ({ fileList }) => {
+    this.setState({ fileList });
+    return this.props.handleImageFiles && this.props.handleImageFiles(fileList);
+  }
 
   render() {
     const { previewVisible, previewImage, fileList } = this.state;
     const uploadButton = (
       <div>
         <PlusOutlined/>
-        <div className="ant-upload-text">Upload</div>
+        <div>Upload</div>
       </div>
     );
     return (
