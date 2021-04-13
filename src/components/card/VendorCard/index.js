@@ -7,10 +7,10 @@ const NAME_FONT_SIZE = '16px';
 const LEFT_PADDING = '30px';
 const LOCATION_FONT_SIZE = '12px';
 const COST_FONT_SIZE = '12px';
-const IMAGE_HEIGHT = '130px';
+const IMAGE_HEIGHT = '160px';
 const IMAGE_WIDTH = '230px';
-const CONTAINER_HEIGHT = '170px';
-const CONTAINER_WIDTH = '400px';
+const CONTAINER_HEIGHT = '200px';
+const CONTAINER_WIDTH = '500px';
 const HOVER_OFFESET = 5;
 
 const Container = styled.div`
@@ -27,6 +27,11 @@ const Container = styled.div`
     display: block;
     width: 250px;
     height: 400px;
+  }
+  @media ${theme.screenSize.upToXlarge} {
+    display: block;
+    width: 350px;
+    height: 500px;
   }
 `;
 
@@ -63,6 +68,11 @@ const BusinessImage = styled.img`
   @media ${theme.screenSize.upToLarge} {
     padding-bottom: ${theme.size.medium};
     width: 200px;
+    height: 50%;
+  }
+  @media ${theme.screenSize.upToXlarge} {
+    padding-bottom: ${theme.size.medium};
+    width: 300px;
     height: 50%;
   }
 `;
