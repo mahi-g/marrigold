@@ -29,8 +29,8 @@ const StyledButton = styled.button`
 `
 
 const Button = ({
-    text=null,
-    onClick,
+    onClick=null,
+    to=null,
     height,
     width,
     ...props
@@ -40,9 +40,7 @@ const Button = ({
         height={height}
         width={width}
         {...props}
-    >
-        {text}
-    </StyledButton>
+    />
 );
 export default Button;
 

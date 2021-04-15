@@ -6,6 +6,7 @@ import PlacesAutocomplete from "react-places-autocomplete";
 import VendorCard from '../components/card/VendorCard';
 import testImage from "../images/test.jpg";
 import Button from '../components/button';
+import Paginate from '../components/paginate';
 
 const StyledFormInput = styled(FormInput)`
   margin-left: 120px;
@@ -42,24 +43,6 @@ const StyledVendorCard = styled(VendorCard)`
   margin-top: ${theme.size.xlarge};
 `;
 
-const CardContainer = styled.div`
-  height: 90vh;
-`;
-
-const CardGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-auto-rows: auto;
-  grid-gap: 1rem;
-  @media ${theme.screenSize.upToMedium} {
-    display: block;
-  }
-`;
-
-const StyledButton = styled(Button)`
-  margin-bottom: ${theme.size.xxlarge}; 
-  margin-left: 45%; 
-`;
 
 const VendorSearch = () => {
   const [location, setLocation] = useState("");
@@ -109,6 +92,36 @@ const VendorSearch = () => {
       ratingValue: 4,
       priceRange: [200,500],
       totalRating: 30,
+    },
+    {
+      id:5,
+      businessName: "Tahiya's Photography",
+      location: "New York, NY",
+      image: testImage,
+      href: '/photographers/Tahiyas%20Photography',
+      ratingValue: 4,
+      priceRange: [200,500],
+      totalRating: 30,
+    },
+    {
+      id:6,
+      businessName: "Tahiya's Photography",
+      location: "New York, NY",
+      image: testImage,
+      href: '/photographers/Tahiyas%20Photography',
+      ratingValue: 4,
+      priceRange: [200,500],
+      totalRating: 30,
+    },
+    {
+      id:7,
+      businessName: "Tahiya's Photography",
+      location: "New York, NY",
+      image: testImage,
+      href: '/photographers/Tahiyas%20Photography',
+      ratingValue: 4,
+      priceRange: [200,500],
+      totalRating: 30,
     }
   ]
   // will add a line here to get the list of all available vendors by location from the database
@@ -139,11 +152,9 @@ const VendorSearch = () => {
             </div>
           )}
         </PlacesAutocomplete>
-        {
-          // once we have a list of vendors from the api, we will map through them here
-          <CardContainer>
-            <CardGrid>
-              {
+        {/* once we have a list of vendors from the api, we will map through them here */}
+          <Paginate limit={6}>
+          {
                 vendorsList.map( item =>
                   <StyledVendorCard
                     key={item.id}
@@ -157,17 +168,7 @@ const VendorSearch = () => {
                   />
                 )
               }
-            </CardGrid>
-          </CardContainer>
-        }
-        {/* dummy button for now. will work once pagination component is ready*/}
-        <StyledButton
-          text={'Load More'}
-          onClick={null}
-          width={'120px'}
-          height={'40px'}
-        />
-
+          </Paginate>
       </>
     )
 };

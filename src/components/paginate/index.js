@@ -1,24 +1,31 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import styled from '@emotion/styled';
-import { useLocation } from '@reach/router';
-//import { buildQueryString, parseQueryString } from '~utils/query-string';
-import Button from './button';
-import { screenSize, size } from './theme';
+import { buildQueryString, parseQueryString } from '../../utils/query-string';
+import Button from '../../components/button';
+import { theme } from '../../theme';
 
 const ElementGrid = styled('div')`
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-auto-rows: auto;
-    grid-gap: 1rem;
+    grid-gap: 1/2rem;
     @media ${theme.screenSize.upToMedium} {
-    display: block;
+        display: block;
     }
 `;
 
 const HasMoreButtonContainer = styled('div')`
-    margin-bottom: ${size.large};
-    margin-top: ${size.large};
+    margin-bottom: ${theme.size.large};
+    margin-top: ${theme.size.large};
     text-align: center;
+`;
+
+const StyledButton = styled(Button)`
+  margin-bottom: ${theme.size.large}; 
+`;
+
+const CardContainer = styled.div`
+  margin-bottom: ${theme.size.xlarge};
 `;
 
 const Paginate = ({
@@ -28,8 +35,9 @@ const Paginate = ({
     gridProps = {},
     ...props
 }) => {
-    const { pathname, search } = useLocation();
-    const localPage = pathname.replace(__PATH_PREFIX__, '');
+    const pathname = window.location.pathname;
+    const search  = window.location.search;
+    const localPage = pathname;
     // Build next link, preserving other links
     const nextPageLink = useMemo(() => {
         // Get page if exists from search
@@ -53,14 +61,25 @@ const Paginate = ({
         visibleLength,
     ]);
 
+    const handleClick =() => {
+        //will change this with a fetch call once the backend is set up
+        window.location.href=nextPageLink;
+    };
+
     return (
         <div {...props}>
-            <Grid children={visibleElements} {...gridProps} />
+            <CardContainer>
+                <Grid children={visibleElements} {...gridProps} />
+            </CardContainer>
             {hasMore && (
                 <HasMoreButtonContainer>
-                    <Button secondary pagination to={nextPageLink}>
+                    <StyledButton 
+                        onClick={handleClick}
+                        width={'120px'}
+                        height={'40px'}
+                    >
                         Load more
-                    </Button>
+                    </StyledButton>
                 </HasMoreButtonContainer>
             )}
         </div>
