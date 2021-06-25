@@ -12,6 +12,10 @@ const LoadableHomePage = lazy(() =>
     import( './pages/home')
 );
 
+const LoadableVendorPage = lazy(() =>
+    import( './pages/vendors')
+);
+
 const LoadableTestPage = lazy(() =>
     import( './pages/test')
 );
@@ -47,36 +51,40 @@ const Container = styled('div')`
 const App = () => (
     <ThemeProvider theme={theme}>
         <Container>
-        <Nav />
+        <Nav/>
             <BrowserRouter>
-                    <Suspense fallback={<Loading />}>
-                        <Switch>
-                            <Route
-                                path="/test"
-                                component={LoadableTestPage}
-                            />
-                            <Route
-                                path="/signin"
-                                component={LoadableLoginPage}
-                            />
-                            <Route
-                                path="/signup"
-                                component={LoadableSignUpPage}
-                            />
-                            <Route
-                                path="/contact"
-                                component={LoadableContactPage}
-                            />
-                            <Route
-                                path="/review"
-                                component={LoadableReviewPage}
-                            />
-                            <Route
-                                path="/"
-                                component={LoadableHomePage}
-                            />
-                        </Switch>
-                    </Suspense>
+                <Suspense fallback={<Loading />}>
+                    <Switch>
+                        <Route
+                            path="/test"
+                            component={LoadableTestPage}
+                        />
+                        <Route
+                            path="/signin"
+                            component={LoadableLoginPage}
+                        />
+                        <Route
+                            path="/signup"
+                            component={LoadableSignUpPage}
+                        />
+                        <Route
+                            path="/contact"
+                            component={LoadableContactPage}
+                        />
+                        <Route
+                            path="/review"
+                            component={LoadableReviewPage}
+                        />
+                        <Route
+                            path="/vendors"
+                            component={LoadableVendorPage}
+                        />
+                        <Route
+                            path="/"
+                            component={LoadableHomePage}
+                        />
+                    </Switch>
+                </Suspense>
             </BrowserRouter>
         </Container>
     </ThemeProvider>

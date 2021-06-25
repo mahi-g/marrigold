@@ -1,14 +1,14 @@
-import React, { useState } from 'react'
-import { useMediaQueries } from '../../hooks/MediaQueries'
-import styled from '@emotion/styled'
-import { theme } from '../../theme'
-import AccountCircleRoundedIcon from '@material-ui/icons/AccountCircleRounded'
-import CloseIcon from '@material-ui/icons/Close'
-import MenuIcon from '@material-ui/icons/Menu'
-import LockOpenRoundedIcon from '@material-ui/icons/LockOpenRounded'
-import StorefrontIcon from '@material-ui/icons/Storefront'
-import TextsmsRoundedIcon from '@material-ui/icons/TextsmsRounded'
-import marigold from '../../images/marigold.png'
+import React, { useState } from 'react';
+import { useMediaQueries } from '../../hooks/useMediaQueries';
+import styled from '@emotion/styled';
+import { theme } from '../../theme';
+import AccountCircleRoundedIcon from '@material-ui/icons/AccountCircleRounded';
+import CloseIcon from '@material-ui/icons/Close';
+import MenuIcon from '@material-ui/icons/Menu';
+import LockOpenRoundedIcon from '@material-ui/icons/LockOpenRounded';
+import StorefrontIcon from '@material-ui/icons/Storefront';
+import TextsmsRoundedIcon from '@material-ui/icons/TextsmsRounded';
+import marigold from '../../images/marigold.png';
 
 const IS_LOGGED_IN = true;
 const user = {
